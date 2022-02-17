@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
   </head>
   <body>
     <div class="container-scroller">
@@ -202,6 +203,124 @@
                       </div>
                     </div>
                   </div>
+
+
+<script>
+  var account;
+  window.addEventListener('load',async()=>{
+
+    if(typeof window.ethereum!=='undefined'){
+      console.log("Metamask Available");
+    }
+    if(window.ethereum){
+      window.web3=new Web3(ethereum);
+      ethereum.autoRefreshOnNetworkChange=false;
+      const accounts=await ethereum.enable();
+      account=accounts[0];
+    }
+    else if(window.web3){
+      window.web3=new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c"));
+    }
+  });
+  var abi=[
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "doc_id",
+				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "SLMC_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "NIC_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Passport_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Phone_no",
+				"type": "string"
+			}
+		],
+		"name": "adddoc",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "doc_id",
+				"type": "int256"
+			}
+		],
+		"name": "getDoctor",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+] 
+var contractaddress='0xa8a8E239b6C830b690E7D781e19a9596120CfEDe';
+function add_data(){
+  var myContract=new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice:'5000000',gas:'500000'});
+  var doc1=document.getElementById("doc_uname").value;
+  var doc2=document.getElementById("doc_email").value;
+  var doc3=document.getElementById("doc_mobile").value;
+  var doc4=document.getElementById("doc_pword").value;
+  var doc5=document.getElementById("doc_cpword").value;
+var result=myContract.methods.store_doc_details(doc1,doc2,doc3,doc4,doc5).send(function(err,result){
+  if(err){console.log(err);}
+});
+}
+</script>
+
+
+
+
+
+
+
                 <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
@@ -210,31 +329,31 @@
                         <div class="form-group row">
                           <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Username">
+                            <input type="text" class="form-control" id="doc_uname" placeholder="Username">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
                           <div class="col-sm-9">
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email">
+                            <input type="email" class="form-control" id="doc_email" placeholder="Email">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="exampleInputMobile" class="col-sm-3 col-form-label">Mobile</label>
                           <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Mobile number">
+                            <input type="text" class="form-control" id="doc_mobile" placeholder="Mobile number">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
                           <div class="col-sm-9">
-                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                            <input type="password" class="form-control" id="doc_pword" placeholder="Password">
                           </div>
                         </div>
                         <div class="form-group row">
                           <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Re Password</label>
                           <div class="col-sm-9">
-                            <input type="password" class="form-control" id="exampleInputConfirmPassword2" placeholder="Password">
+                            <input type="password" class="form-control" id="doc_cpword" placeholder="Password">
                           </div>
                         </div>
                         <div class="form-check form-check-flat form-check-primary">
@@ -248,6 +367,18 @@
                   </div>
                 </div>
                
+
+
+
+
+
+
+
+
+
+
+
+
                 <div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
