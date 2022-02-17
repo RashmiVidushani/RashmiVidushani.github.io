@@ -224,52 +224,19 @@
   });
   var abi=[
 	{
-		"inputs": [
-			{
-				"internalType": "int256",
-				"name": "doc_id",
-				"type": "int256"
-			},
-			{
-				"internalType": "string",
-				"name": "SLMC_no",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "NIC_no",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "Passport_no",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "Email",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "Phone_no",
-				"type": "string"
-			}
-		],
-		"name": "adddoc",
-		"outputs": [],
+		"inputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
+		"type": "constructor"
 	},
 	{
 		"inputs": [
 			{
-				"internalType": "int256",
-				"name": "doc_id",
-				"type": "int256"
+				"internalType": "uint16",
+				"name": "doctor_id",
+				"type": "uint16"
 			}
 		],
-		"name": "getDoctor",
+		"name": "retreive_doctor_details",
 		"outputs": [
 			{
 				"internalType": "string",
@@ -282,9 +249,9 @@
 				"type": "string"
 			},
 			{
-				"internalType": "string",
+				"internalType": "uint256",
 				"name": "",
-				"type": "string"
+				"type": "uint256"
 			},
 			{
 				"internalType": "string",
@@ -299,9 +266,47 @@
 		],
 		"stateMutability": "view",
 		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "doctor_id",
+				"type": "uint16"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_doctor_mobile",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_password",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_cpassword",
+				"type": "string"
+			}
+		],
+		"name": "store_doctor_details",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	}
-] 
-var contractaddress='0xa8a8E239b6C830b690E7D781e19a9596120CfEDe';
+]
+var contractaddress='0xf4e2667733aA71d07621af798d9621159A61f9Ec';
 function add_data(){
   var myContract=new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice:'5000000',gas:'500000'});
   var doc1=document.getElementById("doc_uname").value;
