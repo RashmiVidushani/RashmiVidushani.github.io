@@ -49,16 +49,31 @@ Licence URI: https://www.os-templates.com/template-terms
         <h1><a href="index.html">Health-Tech</a></h1>
         <!-- ################################################################################################ -->
       </div>
-      <nav id="mainav" class="fl_right"> 
+      <nav id="mainav" class="fl_right">
         <!-- Navigation main -->
        
       <div class="fl_right nospace">
-        <button class="btn"onclick="document.getElementById('form').style.display='block'" style="width:225px;height: 45px;"><img src="https://app.timeswap.io/Metamask.e1797d57.svg">Connect Wallet</button>
+        <!--<button class="btn"onclick="document.getElementById('form').style.display='block'" style="width:225px;height: 45px;"><img src="https://app.timeswap.io/Metamask.e1797d57.svg">Connect Wallet</button>-->
+        <button class="btn enableEthereumButton" style="width:225px;height: 45px;"><img src="https://app.timeswap.io/Metamask.e1797d57.svg">Connect Metamask</button>
+<h2>Connected to: <span class="showAccount"></span></h2>
       </div>
       <div class="fl_right nospace">
-        <button class="btn" style="width:auto;height: 45px;" onclick="window.location.href='./corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ddash/ddash_general.html'">Login</button>
+        <button class="btn" style="width:auto;height: 45px;" onclick="window.location.href='login.php'">Login</button>
       </div>
-          
+          <script>
+            const ethereumButton = document.querySelector('.enableEthereumButton');
+const showAccount = document.querySelector('.showAccount');
+
+ethereumButton.addEventListener('click', () => {
+  getAccount();
+});
+
+async function getAccount() {
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  const account = accounts[0];
+  showAccount.innerHTML = account;
+}
+          </script>
         <!-- Navigation main End -->
       </nav>
     </header>
@@ -70,7 +85,7 @@ Licence URI: https://www.os-templates.com/template-terms
       <p>We protect your data</p>
       <h3 class="heading">Health-Tech</h3>
       <p>Your data is always safe with us!</p>
-      <p class="fl_center nospace"><button class="btn"onclick="window.location.href='register.html'" style="width:auto;">Register?</button></p>
+      <p class="fl_center nospace"><button class="btn"onclick="window.location.href='d_register.php'" style="width:auto;">Register?</button></p>
        <!-- <div id="rej" class="modal" >
             <div class="imgcontainer">
               <span onclick="document.getElementById('rej').style.display='none'" class="close" title="Close Modal">&times;</span>
