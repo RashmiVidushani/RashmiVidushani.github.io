@@ -157,6 +157,41 @@
                                 </div>
                               </div>
                         
+                          <br>
+                          <br>
+                          <h4 class="card-title">Account settings</h4>
+                          <form class="forms-sample">
+                            <div class="form-group row">
+                              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="doc_uname" placeholder="Username">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
+                              <div class="col-sm-9">
+                                <input type="email" class="form-control" id="doc_email" placeholder="Email">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="exampleInputMobile" class="col-sm-3 col-form-label">Mobile</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="doc_mobile" placeholder="Mobile number">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+                              <div class="col-sm-9">
+                                <input type="password" class="form-control" id="doc_pword" placeholder="Password">
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Re Password</label>
+                              <div class="col-sm-9">
+                                <input type="password" class="form-control" id="doc_cpword" placeholder="Password">
+                              </div>
+                            </div>
+                          
                           <div class="form-group">
                             <label>Upload SLMC image</label>
                             <input type="file" name="img[]" class="file-upload-default">
@@ -185,84 +220,142 @@
                               </span>
                             </div>
                           </div>
-                          
                           <button type="submit" class="btn btn-primary mr-2">Save</button>
                           <button class="btn btn-dark">Cancel</button>
                         </form>
                       </div>
                     </div>
                   </div>
-                <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title">Account settings</h4>
-                      <form class="forms-sample">
-                        <div class="form-group row">
-                          <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputUsername2" placeholder="Username">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
-                          <div class="col-sm-9">
-                            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="exampleInputMobile" class="col-sm-3 col-form-label">Mobile</label>
-                          <div class="col-sm-9">
-                            <input type="text" class="form-control" id="exampleInputMobile" placeholder="Mobile number">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
-                          <div class="col-sm-9">
-                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-                          </div>
-                        </div>
-                        <div class="form-group row">
-                          <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Re Password</label>
-                          <div class="col-sm-9">
-                            <input type="password" class="form-control" id="exampleInputConfirmPassword2" placeholder="Password">
-                          </div>
-                        </div>
-                        <div class="form-check form-check-flat form-check-primary">
-                          <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input"> Remember me </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary mr-2">Save</button>
-                        <button class="btn btn-dark">Cancel</button>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-               
-                <div class="col-md-6 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title">Address</h4>
-                      <div class="form-group">
-                        <label>Address 1</label>
-                        <input type="text" class="form-control" placeholder="Address" aria-label="Address">
-                      </div>
-                      <div class="form-group">
-                        <label>State</label>
-                        <input type="text" class="form-control" placeholder="State" aria-label="State">
-                      </div>
-                      <div class="form-group">
-                        <label>Country</label>
-                        <input type="text" class="form-control" placeholder="Country" aria-label="Country">
-                      </div>
-                      <div class="form-group">
-                        <label>Postcode</label>
-                        <input type="text" class="form-control" placeholder="Postcode" aria-label="Postcode">
-                      </div>
-                      <button type="submit" class="btn btn-primary mr-2">Save</button>
-                          <button class="btn btn-dark">Cancel</button> 
-                    </div>
-                  </div>
-                </div>
+
+
+<script>
+  var account;
+  window.addEventListener('load',async()=>{
+
+    if(typeof window.ethereum!=='undefined'){
+      console.log("Metamask Available");
+    }
+    if(window.ethereum){
+      window.web3=new Web3(ethereum);
+      ethereum.autoRefreshOnNetworkChange=false;
+      const accounts=await ethereum.enable();
+      account=accounts[0];
+    }
+    else if(window.web3){
+      window.web3=new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c"));
+    }
+  });
+  var abi=[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "doctor_id",
+				"type": "uint16"
+			}
+		],
+		"name": "retreive_doctor_details",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint16",
+				"name": "doctor_id",
+				"type": "uint16"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_doctor_mobile",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_password",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_doctor_cpassword",
+				"type": "string"
+			}
+		],
+		"name": "store_doctor_details",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
+var contractaddress='0xf4e2667733aA71d07621af798d9621159A61f9Ec';
+function add_data(){
+  var myContract=new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice:'5000000',gas:'500000'});
+  var doc1=document.getElementById("doc_uname").value;
+  var doc2=document.getElementById("doc_email").value;
+  var doc3=document.getElementById("doc_mobile").value;
+  var doc4=document.getElementById("doc_pword").value;
+  var doc5=document.getElementById("doc_cpword").value;
+var result=myContract.methods.store_doc_details(doc1,doc2,doc3,doc4,doc5).send(function(err,result){
+  if(err){console.log(err);}
+});
+}
+function show_data(){
+  var myContract=new web3.eth.Contract(abi,contractaddress,{from:account,gasPrice:'5000000', gas:'500000'});
+  var idd=document.getElementById("did").value;
+  var result=myContract.methods.retreive_doctor_details(idd).call(function(err,result){
+    if(err){console.log(err);}
+    if(result){
+      document.getElementById("get_doc_name").innerHTML=result[0];
+      document.getElementById("get_doc_email").innerHTML=result[1];
+      document.getElementById("get_doc_mobile").innerHTML=result[2];
+      document.getElementById("get_doc_pword").innerHTML=result[3];
+      document.getElementById("get_doc_cpword").innerHTML=result[4];
+    }
+  })
+}
+</script>
               </div>
             </div>
             <!-- content-wrapper ends -->
