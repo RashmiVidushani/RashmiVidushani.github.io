@@ -78,12 +78,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
-            if(mysqli_stmt_execute($stmt)){
+          /*  if(mysqli_stmt_execute($stmt)){
                 // Redirect to login page
                 header("location: index.html");
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
-            }
+            }*/
 
             // Close statement
             mysqli_stmt_close($stmt);
@@ -122,19 +122,59 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
               <div class="card-body px-5 py-5">
                 <h3 class="card-title text-left mb-3">Register</h3>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+                <label>User Type *</label>
+              <div class="row">
+              &emsp;  &emsp;
+                <div class="form-check">
+                <input type="radio" class="form-check-input" id="individual" name="optionsRadios1" value=""> 
+                <label class="form-check-label">Individual</label> 
+                </div>
+                &emsp;  &emsp;
+                <div class="form-check">
+                <input type="radio" class="form-check-input" id="doctor" name="optionsRadios1" value=""> 
+                <label class="form-check-label">Doctor</label> 
+                </div>
+              </div>
+           
+              <div class="row">
+              &emsp;  &emsp;
+                <div class="form-check">
+                <input type="radio" class="form-check-input" id="hospital" name="optionsRadios1" value="">
+                <label class="form-check-label">Hospital</label> 
+                </div>
+                &emsp;  &emsp;
+                <div class="form-check">
+                <input type="radio" class="form-check-input" id="Other" name="optionsRadios1" value="">
+                <label class="form-check-label">Other</label> 
+                </div>
+              </div>
+
+<script> if(document.getElementsById('individual').checked){
+window.location.href='/corona-free-dark-bootstrap-admin-template-1.0.0/template/idash.html'
+}
+else if(document.getElementsById('doctor').checked){
+  window.location.href='/corona-free-dark-bootstrap-admin-template-1.0.0/template/ddash.html'
+}
+else {
+  window.location.href='/corona-free-dark-bootstrap-admin-template-1.0.0/template/hdash.html'
+}
+
+
+</script>
+
                   <div class="form-group">
                     <label>Username *</label>
-                    <input type="text" name="username" class="form-control p_input"<?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
+                    <input type="text" name="username" class="form-control p_input"<?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?> value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
                   </div>
                   <div class="form-group">
                     <label>Password *</label>
-                    <input type="password" name="password" class="form-control p_input" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+                    <input type="password" name="password" class="form-control p_input" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?> value="<?php echo $password; ?>">
                 <span class="invalid-feedback"><?php echo $password_err; ?></span>
                   </div>
                   <div class="form-group">
                     <label>Confirm password *</label>
-                    <input type="password" name="confirm_password" class="form-control p_input" <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
+                    <input type="password" name="confirm_password" class="form-control p_input" <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?> value="<?php echo $confirm_password; ?>">
                 <span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
                   </div>
                   <div class="form-group d-flex align-items-center justify-content-between">
