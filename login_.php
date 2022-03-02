@@ -64,7 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location:corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ddash/ddash_general.php");
+                            header("location:corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ddash/ddash_general.html");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
