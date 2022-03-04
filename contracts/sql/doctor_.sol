@@ -16,11 +16,7 @@ contract doctor_{
     constructor(){
          owner =msg.sender;
      }
-      modifier isOwner() {
 
-         require(msg.sender == owner, "Access is not allowed");
-
-         _;}
 
     Doctor []doc;
     function store_doc(

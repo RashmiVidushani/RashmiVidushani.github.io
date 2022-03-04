@@ -200,7 +200,7 @@
 
         var contractaddress='0xBBF6C4FF98C11DB6428fF4E541C841515d75957f';
         function getpat() {
-            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '5000000'});
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '1500000000', gas: '30000000'});
             var id = document.getElementById("get_nic").value;
 			
              var result = myContract.methods.retreive_pat(id).call(function (err, result) {
@@ -222,7 +222,7 @@
 
         
         function addpat() {
-            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '5000000'});
+            var myContract = new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice: '1000000000', gas: '8000000'});
             var id = document.getElementById("pid").value;
             var name = document.getElementById("pname").value;
             var age = document.getElementById("page").value;

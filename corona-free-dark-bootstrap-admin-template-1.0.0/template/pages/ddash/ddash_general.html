@@ -17,9 +17,23 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+
+     <!--
+          CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+        -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+    <!--
+          CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+        -->
+
+
+        
   </head>
   <body>
+     <!--
+          DOCTOR CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+        -->
     <script>
       var account;
 	window.addEventListener('load', async () => {
@@ -169,10 +183,10 @@
 
 
         
-        var contractaddress = '0xe641c96985fEFF1fBf7d3bfF9d57B609d089f03D';
+        var contractaddress = '0x6408ed18368ce1925a646BF51b4f397D9B5D61A8';
         /*need more working on*/
         function adddoc() {
-            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account,  gas: 1500000, gasPrice: '30000000000'});
             var id = document.getElementById("did").value;
             var SLMC = document.getElementById("slmc").value;
             var dname = document.getElementById("name").value;
@@ -193,7 +207,7 @@
         /*need more working on*/
 
 		function getDoc() {
-            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gas: 1500000, gasPrice: '30000000000'});
             var idd = document.getElementById("get_slmc").value;
              var result = myContract.methods.retreive_doc(idd).call(function (err, result) {
                
@@ -211,6 +225,10 @@
 
 
     </script>
+
+  <!--
+          DOCTOR CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+        -->
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -277,6 +295,9 @@
             </button>
           </div>
         </nav>
+        <!--
+          DOCTOR FORM FOR ADDING AN RETRIEVING DATA!
+        -->
         <!-- partial -->
         <div class="main-panel">
             <div class="content-wrapper">
@@ -298,7 +319,7 @@
                           <h4 class="card-title">Show Doctor Details</h4>
                           <div class="row">
                             <tr>
-                              <td>Enter SLMC:</td>
+                              <td>Enter Doctor ID:</td>
                              <td><input type="text" id="get_slmc" name="get_slmc"></td> 
                              <td> <input type="button" class="btn btn-primary mr-2" onclick="getDoc()" value="show details"></td>
                             </tr>
@@ -342,7 +363,7 @@
                               <div class="card-body">
                                 <h4 class="card-title">Enter Doctor Details</h4>
                           <form>
-                            <table style="width:25%">
+                            <table style="width:50%">
                               <tr>
                                 <td>Enter Doctor Id:</td>
                                 <td><input type="text" id="did" name="did"></td>
@@ -374,9 +395,12 @@
                               <td>Doctor Address:</td>
                               <td><input type="text" id="address" name="address"></td>
                               </tr>
-                              <tr>
-                                  <tr><td><input type="button" onclick="adddoc()" value="Enter Details"></td></tr>
+                              <div class="row">
+                                <tr>
+                                  <tr><td><input type="button"  class="btn btn-primary mr-2"onclick="adddoc()" value="Enter Details"></td></tr>
                               </tr>
+                              </div>
+                             
                             </table>
                                 </form>
                                 
@@ -385,8 +409,12 @@
                           </div>
                            </div>
             </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:../../partials/_footer.html -->
+        <!--
+          DOCTOR FORM FOR ADDING AN RETRIEVING DATA!
+        -->
+
+
+           
             <footer class="footer">
               <div class="d-sm-flex justify-content-center justify-content-sm-between">
                 <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>

@@ -17,21 +17,21 @@ $username_err = $password_err = $login_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
-    // Check if username is empty
+
+/* Check if username is empty       Check if password is empty */
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter username.";
     } else{
         $username = trim($_POST["username"]);
     }
     
-    // Check if password is empty
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter your password.";
     } else{
         $password = trim($_POST["password"]);
     }
-    
+/* Check if username is empty       Check if password is empty */
+
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
         // Prepare a select statement
