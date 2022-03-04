@@ -31,20 +31,23 @@
                 <h3 class="card-title text-left mb-3">Select who you are?</h3>
                 
         <form action="usertype_.php" method="post">
-        <input type="radio" id="doctor" name="fav_language" value="Doctor">
+          <!--
+        <input type="radio" id="doctor" name="usertype" value="Doctor" >
         <label for="doctor">Doctor</label><br>
-        <input type="radio" id="individual" name="fav_language" value="Individual">
+        <input type="radio" id="individual" name="usertype" value="Individual">
         <label for="individual">Individual</label><br>
-        <input type="radio" id="hospital" name="fav_language" value="Hospital">
+        <input type="radio" id="hospital" name="usertype" value="Hospital">
         <label for="hospital">Hospital</label>
         <div class="form-group">
             <input type="submit" name="submit" class="btn btn-primary" value="continue">
         </div>
-        <?php
- include "usertype_.php"
- ?>
-
-    </form>
+-->
+<a href="corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/idash/idash_stat.html" > Individual</a>
+<br>
+<a href="corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ddash/ddash_stat.html" > Doctor</a>
+<br>
+<a href="corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/hdash/hdash_stat.html" > Hospital</a>
+</form>
               </div>
             </div>
           </div>

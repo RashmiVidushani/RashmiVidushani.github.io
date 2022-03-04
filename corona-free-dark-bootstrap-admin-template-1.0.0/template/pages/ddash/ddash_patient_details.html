@@ -19,6 +19,208 @@
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
   </head>
   <body>
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+    <script>	
+	
+	var account;
+	window.addEventListener('load', async () => {
+
+	
+		if (typeof window.ethereum !== 'undefined') { 
+			console.log("MetaMask is Available :) !"); 
+			}
+			
+		// Modern DApp browsers
+		if (window.ethereum) {
+			window.web3 = new Web3(ethereum);
+			
+			// To prevent the page reloading when the MetaMask network changes
+			ethereum.autoRefreshOnNetworkChange = false;
+			
+			// To Capture the account details from MetaMask
+			const accounts = await ethereum.enable();
+			account = accounts[0];
+				
+			}
+		// Legacy DApp browsers
+		else if (window.web3) {
+			//window.web3 = new Web3(web3.currentProvider);
+			window.web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c")); 
+			}
+		// Non-DApp browsers
+		else {
+			console.log('Non-Ethereum browser detected. Please install MetaMask');
+			}
+			
+			});
+    	
+        var abi =[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "Patientlist",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "patient_id",
+				"type": "int256"
+			}
+		],
+		"name": "retreive_pat",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "patient_id",
+				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "NIC",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "age",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "gender",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "height",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "weight",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Phone_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Address",
+				"type": "string"
+			}
+		],
+		"name": "store_pat",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];
+
+        var contractaddress='0xBBF6C4FF98C11DB6428fF4E541C841515d75957f';
+        function getpat() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '5000000'});
+            var id = document.getElementById("get_nic").value;
+			
+             var result = myContract.methods.retreive_pat(id).call(function (err, result) {
+               
+                if (err) { console.log(err); }
+                if (result) { 
+          document.getElementById("get_name").innerHTML = result[0];
+					document.getElementById("get_age").innerHTML = result[1];
+					document.getElementById("get_gender").innerHTML = result[2];
+					document.getElementById("get_height").innerHTML = result[3];
+					document.getElementById("get_weight").innerHTML = result[4];
+          document.getElementById("get_email").innerHTML = result[5];
+          document.getElementById("get_phone").innerHTML = result[6];
+					document.getElementById("get_address").innerHTML = result[7];
+                }
+               
+                });
+				}
+
+        </script>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -96,56 +298,66 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Patient Profile</h4>
-                        <form class="forms-sample">
-                            <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">First Name</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" class="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Last Name</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" class="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Gender</label>
-                                    <div class="col-sm-9">
-                                      <select class="form-control">
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
-                                    <div class="col-sm-9">
-                                      <input class="form-control" placeholder="dd/mm/yyyy" />
-                                    </div>
-                                  </div>
-                                </div>
+                        <form>
+                          <h4 class="card-title">Show Patient Profile</h4>
+                          <div class="row">
+                            <tr>
+                              <td>Enter NIC:</td>
+                             <td><input type="text" id="get_nic" name="get_nic"></td> 
+                             <td> <input type="button" class="btn btn-primary mr-2" onclick="getpat()" value="show details"></td>
+                            </tr>
                             </div>
-                    
-                          
-                          <button type="submit" class="btn btn-primary mr-2">Add</button>
-                          <button class="btn btn-dark">Cancel</button>
-                        </form>
+                          <table style="width:50%">
+                            <br>
+
+                          <tr>
+                            <td> Patient Name:</td>
+                            <td><div id="get_name"></div></td>
+                          </tr>
+                            
+                          <tr>
+                            <td>Age:</td>
+                            <td><div id="get_age"></div></td>
+                          </tr>
+
+                          <tr>
+                            <td>Gender:</td>
+                            <td><div id="get_gender"></div></td>
+                          </tr>
+
+                            
+                          <tr>
+                            <td>Height(in ft):</td>
+                            <td><div id="get_height"></div></td>
+                          </tr>
+
+                          <tr>
+                            <td>Weight(in kg):</td>
+                            <td><div id="get_weight"></div></td>
+                          </tr>
+
+                          <tr>
+                            <td>Email Id:</td>
+                            <td><div id="get_email"></div></td>
+                          </tr>
+
+                          <tr>
+                            <td>Phone Number:</td>
+                            <td><div id="get_phone"></div></td>
+                          </tr>
+
+                          <tr>
+                            <td>Address:</td>
+                            <td><div id="get_address"></div></td>
+                          </tr>
+                           
+                          </table>
+                              </form>  
                       </div>
                     </div>
                   </div>
-                <div class="col-md-6 grid-margin stretch-card">
+                  <!--
+<div class="col-md-6 grid-margin stretch-card">
                   <div class="card">
                     <div class="card-body">
                       <h4 class="card-title">Pair to Account</h4>
@@ -195,6 +407,8 @@
                     </div>
                   </div>
                 </div>
+                  -->
+                
               </div>
             </div>
             <!-- content-wrapper ends -->

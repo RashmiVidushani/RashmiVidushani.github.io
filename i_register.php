@@ -3,27 +3,27 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+$NIC = $password = $confirm_password = "";
+$NIC_err = $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
-    // Validate username
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter a username.";
-    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
-        $username_err = "Username can only contain letters, numbers, and underscores.";
+    // Validate NIC
+    if(empty(trim($_POST["NIC"]))){
+        $NIC_err = "Please enter a NIC.";
+    } elseif(!preg_match('/^[a-zA-Z0-9]+$/', trim($_POST["NIC"]))){
+        $NIC_err = "NIC can only contain letters and numbers.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE username = ?";
+        $sql = "SELECT id FROM individual_base WHERE NIC_no = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "s", $param_username);
+            mysqli_stmt_bind_param($stmt, "s", $param_NIC);
             
             // Set parameters
-            $param_username = trim($_POST["username"]);
+            $param_NIC = trim($_POST["NIC"]);
             
             // Attempt to execute the prepared statement
             if(mysqli_stmt_execute($stmt)){
@@ -31,9 +31,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 mysqli_stmt_store_result($stmt);
                 
                 if(mysqli_stmt_num_rows($stmt) == 1){
-                    $username_err = "This username is already taken.";
+                    $NIC_err = "This NIC is already taken.";
                 } else{
-                    $username = trim($_POST["username"]);
+                    $NIC = trim($_POST["NIC"]);
                 }
             } else{
                 echo "Oops! Something went wrong. Please try again later.";
@@ -64,17 +64,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     }
     
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($NIC_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO users (NIC, password) VALUES (?, ?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "ss", $param_NIC, $param_password);
             
             // Set parameters
-            $param_username = $username;
+            $param_NIC = $NIC;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
@@ -123,9 +123,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <h3 class="card-title text-left mb-3">Register</h3>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                   <div class="form-group">
-                    <label>Username *</label>
-                    <input type="phone" class="form-control p_input <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>" name="username">
-                    <span class="invalid-feedback"><?php echo $username_err; ?></span>
+                    <label>NIC *</label>
+                    <input type="phone" class="form-control p_input <?php echo (!empty($NIC_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $NIC; ?>" name="NIC">
+                    <span class="invalid-feedback"><?php echo $NIC_err; ?></span>
                   </div>
                   <div class="form-group">
                     <label>Password *</label>

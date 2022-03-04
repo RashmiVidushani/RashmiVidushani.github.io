@@ -20,10 +20,205 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
   </head>
   <body>
+    <script>
+      var account;
+	window.addEventListener('load', async () => {
+
+	
+		if (typeof window.ethereum !== 'undefined') { 
+			console.log("MetaMask is Available :) !"); 
+			}
+			
+		// Modern DApp browsers
+		if (window.ethereum) {
+			window.web3 = new Web3(ethereum);
+			
+			// To prevent the page reloading when the MetaMask network changes
+			ethereum.autoRefreshOnNetworkChange = false;
+			
+			// To Capture the account details from MetaMask
+			const accounts = await ethereum.enable();
+			account = accounts[0];
+				
+			}
+		// Legacy DApp browsers
+		else if (window.web3) {
+			//window.web3 = new Web3(web3.currentProvider);
+			window.web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c")); 
+			}
+		// Non-DApp browsers
+		else {
+			console.log('Non-Ethereum browser detected. Please install MetaMask');
+			}
+			
+			});
+    	
+        var abi =[
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "doctorlist",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "doc_id",
+				"type": "int256"
+			}
+		],
+		"name": "retreive_doc",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "doc_id",
+				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "SLMC_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Specialization",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Phone_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Address",
+				"type": "string"
+			}
+		],
+		"name": "store_doc",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];
+
+
+        
+        var contractaddress = '0xe641c96985fEFF1fBf7d3bfF9d57B609d089f03D';
+        /*need more working on*/
+        function adddoc() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var id = document.getElementById("did").value;
+            var SLMC = document.getElementById("slmc").value;
+            var dname = document.getElementById("name").value;
+            var dspec = document.getElementById("spec").value;
+            var demail = document.getElementById("email").value;
+			      var dphone = document.getElementById("phone").value;
+			      var daddress = document.getElementById("address").value;
+           
+           
+             var result = myContract.methods.store_doc(id,SLMC,dname,dspec,demail,dphone,daddress).send(function (err, result) {
+               
+                if (err) {
+                  console.log("error");
+                   console.log(err); }
+              
+                });
+        }
+        /*need more working on*/
+
+		function getDoc() {
+            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '5000000', gas: '500000'});
+            var idd = document.getElementById("get_slmc").value;
+             var result = myContract.methods.retreive_doc(idd).call(function (err, result) {
+               
+                if (err) { console.log(err); }
+                if (result) { 
+                    document.getElementById("get_name").innerHTML = result[0];
+					          document.getElementById("get_spec").innerHTML = result[1];
+				            document.getElementById("get_email").innerHTML = result[2];
+					          document.getElementById("get_phone").innerHTML = result[3];
+                    document.getElementById("get_address").innerHTML = result[4];
+                }
+               
+                });
+        }
+
+
+    </script>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+          <!--display the slmc number here-->
+          <li class="nav-item nav-category">
+            <h5 class="mb-0 font-weight-normal">#slmc</h5>
+          </li>
           <li class="nav-item nav-category">
             <h5 class="mb-0 font-weight-normal">Dashboard</h5>
           </li>
@@ -98,248 +293,97 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Doctor Profile</h4>
-                        <form class="forms-sample">
-                            <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">First Name</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" class="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Last Name</label>
-                                    <div class="col-sm-9">
-                                      <input type="text" class="form-control" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Gender</label>
-                                    <div class="col-sm-9">
-                                      <select class="form-control">
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-6">
-                                  <div class="form-group">
-                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
-                                    <div class="col-sm-9">
-                                      <input class="form-control" placeholder="dd/mm/yyyy" />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                        
-                          <br>
-                          <br>
-                          <h4 class="card-title">Account settings</h4>
-                          <form class="forms-sample">
-                            <div class="form-group row">
-                              <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Username</label>
-                              <div class="col-sm-9">
-                                <input type="text" class="form-control" id="doc_uname" placeholder="Username">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputEmail2" class="col-sm-3 col-form-label">Email</label>
-                              <div class="col-sm-9">
-                                <input type="email" class="form-control" id="doc_email" placeholder="Email">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputMobile" class="col-sm-3 col-form-label">Mobile</label>
-                              <div class="col-sm-9">
-                                <input type="text" class="form-control" id="doc_mobile" placeholder="Mobile number">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
-                              <div class="col-sm-9">
-                                <input type="password" class="form-control" id="doc_pword" placeholder="Password">
-                              </div>
-                            </div>
-                            <div class="form-group row">
-                              <label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Re Password</label>
-                              <div class="col-sm-9">
-                                <input type="password" class="form-control" id="doc_cpword" placeholder="Password">
-                              </div>
-                            </div>
-                          
-                          <div class="form-group">
-                            <label>Upload SLMC image</label>
-                            <input type="file" name="img[]" class="file-upload-default">
-                            <div class="input-group col-xs-12">
-                              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Your SLMC Image here">
-                              <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                              </span>
-                            </div>
-                          </div>  <div class="form-group">
-                            <label>Upload NIC image</label>
-                            <input type="file" name="img[]" class="file-upload-default">
-                            <div class="input-group col-xs-12">
-                              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Your NIC Image here">
-                              <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                              </span>
-                            </div>
-                          </div>  <div class="form-group">
-                            <label>Upload Passport image</label>
-                            <input type="file" name="img[]" class="file-upload-default">
-                            <div class="input-group col-xs-12">
-                              <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Your Passport Image here">
-                              <span class="input-group-append">
-                                <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                              </span>
-                            </div>
+                       
+                        <form>
+                          <h4 class="card-title">Show Doctor Details</h4>
+                          <div class="row">
+                            <tr>
+                              <td>Enter SLMC:</td>
+                             <td><input type="text" id="get_slmc" name="get_slmc"></td> 
+                             <td> <input type="button" class="btn btn-primary mr-2" onclick="getDoc()" value="show details"></td>
+                            </tr>
+                           
                           </div>
-                          <button type="submit" class="btn btn-primary mr-2">Save</button>
-                          <button class="btn btn-dark">Cancel</button>
-                        </form>
+                          <br>
+                          <table style="width:50%">
+                            
+                            <tr>
+                            <td>Doctor Name:</td> 
+                            <td><div id="get_name"></div></td>
+                            </tr>
+                            
+                            <tr>
+                            <td>Doctor Specification:</td>
+                            <td><div id="get_spec"></div></td>
+                            </tr>
+
+                            <tr>
+                              <td>Doctor Email:</td>
+                              <td><div id="get_email"></div></td>
+                            </tr>
+
+                            <tr>
+                            <td>Doctor Phone Number:</td>
+                            <td><div id="get_phone"></div></td>
+                            </tr>
+
+                            <tr>
+                            <td>Doctor Address:</td>
+                            <td><div id="get_address"></div></td>
+                            </tr>
+
+                          </table>
+                          </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                          <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4 class="card-title">Enter Doctor Details</h4>
+                          <form>
+                            <table style="width:25%">
+                              <tr>
+                                <td>Enter Doctor Id:</td>
+                                <td><input type="text" id="did" name="did"></td>
+                                </tr>
+                              <tr>
+                              <td>Enter SLMC:</td>
+                              <td><input type="text" id="slmc" name="slmc"></td>
+                              </tr>
 
-
-<script>
-  var account;
-  window.addEventListener('load',async()=>{
-
-    if(typeof window.ethereum!=='undefined'){
-      console.log("Metamask Available");
-    }
-    if(window.ethereum){
-      window.web3=new Web3(ethereum);
-      ethereum.autoRefreshOnNetworkChange=false;
-      const accounts=await ethereum.enable();
-      account=accounts[0];
-    }
-    else if(window.web3){
-      window.web3=new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c"));
-    }
-  });
-  var abi=[
-	{
-		"inputs": [],
-		"stateMutability": "nonpayable",
-		"type": "constructor"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "doctor_id",
-				"type": "uint16"
-			}
-		],
-		"name": "retreive_doctor_details",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint16",
-				"name": "doctor_id",
-				"type": "uint16"
-			},
-			{
-				"internalType": "string",
-				"name": "_doctor_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_doctor_email",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_doctor_mobile",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_doctor_password",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_doctor_cpassword",
-				"type": "string"
-			}
-		],
-		"name": "store_doctor_details",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	}
-]
-var contractaddress='0xf4e2667733aA71d07621af798d9621159A61f9Ec';
-function add_data(){
-  var myContract=new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice:'5000000',gas:'500000'});
-  var doc1=document.getElementById("doc_uname").value;
-  var doc2=document.getElementById("doc_email").value;
-  var doc3=document.getElementById("doc_mobile").value;
-  var doc4=document.getElementById("doc_pword").value;
-  var doc5=document.getElementById("doc_cpword").value;
-var result=myContract.methods.store_doc_details(doc1,doc2,doc3,doc4,doc5).send(function(err,result){
-  if(err){console.log(err);}
-});
-}
-function show_data(){
-  var myContract=new web3.eth.Contract(abi,contractaddress,{from:account,gasPrice:'5000000', gas:'500000'});
-  var idd=document.getElementById("did").value;
-  var result=myContract.methods.retreive_doctor_details(idd).call(function(err,result){
-    if(err){console.log(err);}
-    if(result){
-      document.getElementById("get_doc_name").innerHTML=result[0];
-      document.getElementById("get_doc_email").innerHTML=result[1];
-      document.getElementById("get_doc_mobile").innerHTML=result[2];
-      document.getElementById("get_doc_pword").innerHTML=result[3];
-      document.getElementById("get_doc_cpword").innerHTML=result[4];
-    }
-  })
-}
-</script>
-              </div>
+                              <tr>
+                              <td> Doctor Name:</td>
+                              <td><input type="text" id="name" name="name"></td>
+                              <td><div id="name"></div></td>
+                              </tr>
+                              
+                              <tr>
+                              <td>Doctor Specification:</td>
+                              <td><input type="text" id="spec" name="spec"></td>
+                              </tr>
+                              <tr>
+                                <td>Doctor Email:</td>
+                                <td><input type="text" id="email" name="email"></td>
+                                </tr>
+                              <tr>
+                              <td>Doctor Phone Number:</td>
+                              <td><input type="text" id="phone" name="phone"></td>
+                              </tr>
+                              <tr>
+                              <td>Doctor Address:</td>
+                              <td><input type="text" id="address" name="address"></td>
+                              </tr>
+                              <tr>
+                                  <tr><td><input type="button" onclick="adddoc()" value="Enter Details"></td></tr>
+                              </tr>
+                            </table>
+                                </form>
+                                
+                              </div>
+                            </div>
+                          </div>
+                           </div>
             </div>
             <!-- content-wrapper ends -->
             <!-- partial:../../partials/_footer.html -->
