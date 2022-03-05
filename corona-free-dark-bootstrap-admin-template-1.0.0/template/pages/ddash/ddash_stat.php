@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Individual Dashboard</title>
+    <title>Doctor Dashboard</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -29,7 +29,7 @@
               <h5 class="mb-0 font-weight-normal">Dashboard</h5>
             </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../idash/idash_stat.html">
+            <a class="nav-link" href="../ddash/ddash_stat.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -37,19 +37,27 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../idash/idash_personal.html">
+            <a class="nav-link" href="../ddash/ddash_general.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
-              <span class="menu-title">Personal data</span>
+              <span class="menu-title">General data</span>
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../idash/idash_medicalrecords.html">
+            <a class="nav-link" href="../ddash/ddash_patient_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
-              <span class="menu-title">Medical Records</span>
+              <span class="menu-title">Patient details</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../ddash/ddash_patientrecords.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-contacts"></i>
+              </span>
+              <span class="menu-title">Patient records</span>
             </a>
           </li>
 

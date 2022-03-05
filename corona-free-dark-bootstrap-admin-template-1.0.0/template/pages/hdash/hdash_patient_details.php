@@ -17,20 +17,20 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
-   
-     <!--
+
+
+ <!--
           CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
         -->
         <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
         <!--
               CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
             -->
-    
+
   </head>
   <body>
-    
      <!--
-          DOCTOR CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+          Patient CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
         -->
         <script>
           var account;
@@ -66,135 +66,124 @@
           });
           
             var abi =[
-      {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "address",
-            "name": "",
-            "type": "address"
-          }
-        ],
-        "name": "doctorlist",
-        "outputs": [
-          {
-            "internalType": "uint256",
-            "name": "",
-            "type": "uint256"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "int256",
-            "name": "doc_id",
-            "type": "int256"
-          }
-        ],
-        "name": "retreive_doc",
-        "outputs": [
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "int256",
-            "name": "doc_id",
-            "type": "int256"
-          },
-          {
-            "internalType": "string",
-            "name": "SLMC_no",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "Name",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "Specialization",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "Email",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "Phone_no",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "Address",
-            "type": "string"
-          }
-        ],
-        "name": "store_doc",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      }
-    ];
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "Patientlist",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "patient_id",
+				"type": "int256"
+			}
+		],
+		"name": "retreive_pat",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "int256",
+				"name": "patient_id",
+				"type": "int256"
+			},
+			{
+				"internalType": "string",
+				"name": "NIC",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Phone_no",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "Address",
+				"type": "string"
+			}
+		],
+		"name": "store_pat",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+];
     
     
             
-            var contractaddress = '0x6408ed18368ce1925a646BF51b4f397D9B5D61A8';
+            var contractaddress = '0x62a3Eb829C16D882Ffdb8fAd9ec288A4285A2169';
             /*need more working on*/
-            function adddoc() {
+            function addpat() {
                 var myContract = new web3.eth.Contract(abi,contractaddress, {from: account,  gas: 1500000, gasPrice: '30000000000'});
-                var id = document.getElementById("did").value;
-                var SLMC = document.getElementById("slmc").value;
-                var dname = document.getElementById("name").value;
-                var dspec = document.getElementById("spec").value;
-                var demail = document.getElementById("email").value;
-                var dphone = document.getElementById("phone").value;
-                var daddress = document.getElementById("address").value;
+                var id = document.getElementById("pid").value;
+                var nic = document.getElementById("nic").value;
+                var dname = document.getElementById("pname").value;
+                var demail = document.getElementById("pemail").value;
+                var dphone = document.getElementById("pphone").value;
+                var daddress = document.getElementById("paddress").value;
                
                
-                 var result = myContract.methods.store_doc(id,SLMC,dname,dspec,demail,dphone,daddress).send(function (err, result) {
+                 var result = myContract.methods.store_pat(id,nic,dname,demail,dphone,daddress).send(function (err, result) {
                    
                     if (err) {
                       console.log("error");
@@ -204,18 +193,17 @@
             }
             /*need more working on*/
     
-        function getDoc() {
+        function getpat() {
                 var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gas: 1500000, gasPrice: '30000000000'});
-                var idd = document.getElementById("get_slmc").value;
-                 var result = myContract.methods.retreive_doc(idd).call(function (err, result) {
+                var idd = document.getElementById("get_nic").value;
+                 var result = myContract.methods.retreive_pat(idd).call(function (err, result) {
                    
                     if (err) { console.log(err); }
                     if (result) { 
-                        document.getElementById("get_name").innerHTML = result[0];
-                        document.getElementById("get_spec").innerHTML = result[1];
-                        document.getElementById("get_email").innerHTML = result[2];
-                        document.getElementById("get_phone").innerHTML = result[3];
-                        document.getElementById("get_address").innerHTML = result[4];
+                        document.getElementById("get_pname").innerHTML = result[0];
+                        document.getElementById("get_pemail").innerHTML = result[1];
+                        document.getElementById("get_pphone").innerHTML = result[2];
+                        document.getElementById("get_paddress").innerHTML = result[3];
                     }
                    
                     });
@@ -225,10 +213,11 @@
         </script>
     
       <!--
-              DOCTOR CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+              Patient CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
             -->
-
     <div class="container-scroller">
+      <!-- partial:../../partials/_sidebar.html -->
+      <div class="container-scroller">
         <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
@@ -237,7 +226,7 @@
             </li>
          
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_stat.html">
+            <a class="nav-link" href="../hdash/hdash_stat.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -245,7 +234,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_general.html">
+            <a class="nav-link" href="../hdash/hdash_general.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -253,7 +242,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_doctor_details.html">
+            <a class="nav-link" href="../hdash/hdash_doctor_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -261,7 +250,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_patient_details.html">
+            <a class="nav-link" href="../hdash/hdash_patient_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -269,7 +258,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_patientrecords.html">
+            <a class="nav-link" href="../hdash/hdash_patientrecords.php">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
@@ -302,7 +291,7 @@
         <div class="main-panel">
           <div class="content-wrapper">
             <div class="page-header">
-              <h3 class="page-title"> Doctor General details </h3>
+              <h3 class="page-title"> Patient General details </h3>
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -316,12 +305,12 @@
                     <div class="card-body">
                      
                       <form>
-                        <h4 class="card-title">Show Doctor Details</h4>
+                        <h4 class="card-title">Show Patient Details</h4>
                         <div class="row">
                           <tr>
-                            <td>Enter Doctor ID:</td>
-                           <td><input type="text" id="get_slmc" name="get_slmc"></td> 
-                           <td> <input type="button" class="btn btn-primary mr-2" onclick="getDoc()" value="show details"></td>
+                            <td>Enter Patient NIC:</td>
+                           <td><input type="text" id="get_nic" name="get_nic"></td> 
+                           <td> <input type="button" class="btn btn-primary mr-2" onclick="getpat()" value="show details"></td>
                           </tr>
                          
                         </div>
@@ -329,28 +318,23 @@
                         <table style="width:50%">
                           
                           <tr>
-                          <td>Doctor Name:</td> 
-                          <td><div id="get_name"></div></td>
-                          </tr>
-                          
-                          <tr>
-                          <td>Doctor Specification:</td>
-                          <td><div id="get_spec"></div></td>
+                          <td>Patient Name:</td> 
+                          <td><div id="get_pname"></div></td>
                           </tr>
 
                           <tr>
-                            <td>Doctor Email:</td>
-                            <td><div id="get_email"></div></td>
+                            <td>Patient Email:</td>
+                            <td><div id="get_pemail"></div></td>
                           </tr>
 
                           <tr>
-                          <td>Doctor Phone Number:</td>
-                          <td><div id="get_phone"></div></td>
+                          <td>Patient Phone Number:</td>
+                          <td><div id="get_pphone"></div></td>
                           </tr>
 
                           <tr>
-                          <td>Doctor Address:</td>
-                          <td><div id="get_address"></div></td>
+                          <td>Patient Address:</td>
+                          <td><div id="get_paddress"></div></td>
                           </tr>
 
                         </table>
@@ -361,43 +345,38 @@
                         <div class="col-12 grid-margin stretch-card">
                           <div class="card">
                             <div class="card-body">
-                              <h4 class="card-title">Enter Doctor Details</h4>
+                              <h4 class="card-title">Enter Patient Details</h4>
                         <form>
                           <table style="width:50%">
                             <tr>
-                              <td>Enter Doctor Id:</td>
-                              <td><input type="text" id="did" name="did"></td>
+                              <td>Enter Patient Id:</td>
+                              <td><input type="text" id="pid" name="pid"></td>
                               </tr>
                             <tr>
-                            <td>Enter SLMC:</td>
-                            <td><input type="text" id="slmc" name="slmc"></td>
+                            <td>Enter nic:</td>
+                            <td><input type="text" id="nic" name="nic"></td>
                             </tr>
 
                             <tr>
-                            <td> Doctor Name:</td>
-                            <td><input type="text" id="name" name="name"></td>
+                            <td> Patient Name:</td>
+                            <td><input type="text" id="pname" name="pname"></td>
                             <td><div id="name"></div></td>
                             </tr>
-                            
-                            <tr>
-                            <td>Doctor Specification:</td>
-                            <td><input type="text" id="spec" name="spec"></td>
-                            </tr>
-                            <tr>
-                              <td>Doctor Email:</td>
-                              <td><input type="text" id="email" name="email"></td>
+                           
+                              <td>Patient Email:</td>
+                              <td><input type="text" id="pemail" name="pemail"></td>
                               </tr>
                             <tr>
-                            <td>Doctor Phone Number:</td>
-                            <td><input type="text" id="phone" name="phone"></td>
+                            <td>Patient Phone Number:</td>
+                            <td><input type="text" id="pphone" name="pphone"></td>
                             </tr>
                             <tr>
-                            <td>Doctor Address:</td>
-                            <td><input type="text" id="address" name="address"></td>
+                            <td>Patient Address:</td>
+                            <td><input type="text" id="paddress" name="paddress"></td>
                             </tr>
                             <div class="row">
                               <tr>
-                                <tr><td><input type="button"  class="btn btn-primary mr-2"onclick="adddoc()" value="Enter Details"></td></tr>
+                                <tr><td><input type="button"  class="btn btn-primary mr-2"onclick="addpat()" value="Enter Details"></td></tr>
                             </tr>
                             </div>
                            
@@ -409,8 +388,9 @@
                         </div>
                          </div>
           </div>
+          </div>
       <!--
-        DOCTOR FORM FOR ADDING AN RETRIEVING DATA!
+        Patient FORM FOR ADDING AN RETRIEVING DATA!
       -->
 
 
@@ -423,19 +403,6 @@
           </footer>
           <!-- partial -->
         </div>
-
-            </div>
-            </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:../../partials/_footer.html -->
-            <footer class="footer">
-              <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-              </div>
-            </footer>
-            <!-- partial -->
-          </div>
           <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->

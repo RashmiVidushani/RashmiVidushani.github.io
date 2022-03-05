@@ -21,15 +21,13 @@
   <body>
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
-      <div class="container-scroller">
-        <!-- partial:../../partials/_sidebar.html -->
         <nav class="sidebar sidebar-offcanvas" id="sidebar">
           <ul class="nav">
             <li class="nav-item nav-category">
               <h5 class="mb-0 font-weight-normal">Dashboard</h5>
             </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_stat.html">
+            <a class="nav-link" href="../ddash/ddash_stat.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -37,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_general.html">
+            <a class="nav-link" href="../ddash/ddash_general.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -45,7 +43,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_patient_details.html">
+            <a class="nav-link" href="../ddash/ddash_patient_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -53,7 +51,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_patientrecords.html">
+            <a class="nav-link" href="../ddash/ddash_patientrecords.php">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
@@ -84,82 +82,29 @@
         </nav>
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
-            <div class="page-header">
-              <h3 class="page-title"> Chart-js </h3>
-              <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="#">Charts</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Chart-js</li>
-                </ol>
-              </nav>
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title"> Patient details </h3>
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Forms</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+                  </ol>
+                </nav>
+              </div>
+              
             </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Line chart</h4>
-                    <canvas id="lineChart" style="height:250px"></canvas>
-                  </div>
-                </div>
+            <!-- content-wrapper ends -->
+            <!-- partial:../../partials/_footer.html -->
+            <footer class="footer">
+              <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
+                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
               </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Bar chart</h4>
-                    <canvas id="barChart" style="height:230px"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Area chart</h4>
-                    <canvas id="areaChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Doughnut chart</h4>
-                    <canvas id="doughnutChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Pie chart</h4>
-                    <canvas id="pieChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6 grid-margin stretch-card">
-                <div class="card">
-                  <div class="card-body">
-                    <h4 class="card-title">Scatter chart</h4>
-                    <canvas id="scatterChart" style="height:250px"></canvas>
-                  </div>
-                </div>
-              </div>
-            </div>
+            </footer>
+            <!-- partial -->
           </div>
-          <!-- content-wrapper ends -->
-          <!-- partial:../../partials/_footer.html -->
-          <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-              <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-            </div>
-          </footer>
-          <!-- partial -->
-        </div>
-        <!-- main-panel ends -->
+          <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->
     </div>

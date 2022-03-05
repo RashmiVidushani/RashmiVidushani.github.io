@@ -1,3 +1,13 @@
+<?php
+
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,7 +52,7 @@
           </li>
          
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_stat.html">
+            <a class="nav-link" href="../ddash/ddash_stat.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -50,7 +60,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_general.html">
+            <a class="nav-link" href="../ddash/ddash_general.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -58,7 +68,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_patient_details.html">
+            <a class="nav-link" href="../ddash/ddash_patient_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -66,7 +76,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../ddash/ddash_patientrecords.html">
+            <a class="nav-link" href="../ddash/ddash_patientrecords.php">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>

@@ -27,7 +27,7 @@
               <h5 class="mb-0 font-weight-normal">Dashboard</h5>
             </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../idash/idash_stat.html">
+            <a class="nav-link" href="../idash/idash_stat.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -35,7 +35,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../idash/idash_personal.html">
+            <a class="nav-link" href="../idash/idash_personal.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -43,7 +43,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../idash/idash_medicalrecords.html">
+            <a class="nav-link" href="../idash/idash_medicalrecords.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>

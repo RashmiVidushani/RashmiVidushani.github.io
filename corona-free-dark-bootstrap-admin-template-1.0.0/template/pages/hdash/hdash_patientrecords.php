@@ -30,7 +30,7 @@
             </li>
          
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_stat.html">
+            <a class="nav-link" href="../hdash/hdash_stat.php">
               <span class="menu-icon">
                 <i class="mdi mdi-playlist-play"></i>
               </span>
@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_general.html">
+            <a class="nav-link" href="../hdash/hdash_general.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -46,7 +46,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_doctor_details.html">
+            <a class="nav-link" href="../hdash/hdash_doctor_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-table-large"></i>
               </span>
@@ -54,7 +54,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_patient_details.html">
+            <a class="nav-link" href="../hdash/hdash_patient_details.php">
               <span class="menu-icon">
                 <i class="mdi mdi-chart-bar"></i>
               </span>
@@ -62,7 +62,7 @@
             </a>
           </li>
           <li class="nav-item menu-items">
-            <a class="nav-link" href="../hdash/hdash_patientrecords.html">
+            <a class="nav-link" href="../hdash/hdash_patientrecords.php">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
