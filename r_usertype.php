@@ -42,11 +42,11 @@
             <input type="submit" name="submit" class="btn btn-primary" value="continue">
         </div>
 -->
-<a href="corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/idash/idash_stat.html" > Individual</a>
+<a href="i_register.php" > Individual</a>
 <br>
-<a href="corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/ddash/ddash_stat.html" > Doctor</a>
+<a href="d_register.php" > Doctor</a>
 <br>
-<a href="corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/hdash/hdash_stat.html" > Hospital</a>
+<a href="h_register.php" > Hospital</a>
 </form>
               </div>
             </div>
