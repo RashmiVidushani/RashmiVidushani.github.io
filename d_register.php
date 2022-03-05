@@ -3,20 +3,22 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
+session_start();
+$username = $slmc = $email = $mobile = $password = $confirm_password = "";
+$username_err = $slmc_err = $email_err= $mobile_err = $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
     // Validate username
     if(empty(trim($_POST["username"]))){
+
         $username_err = "Please enter a username.";
     } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
         $username_err = "Username can only contain letters, numbers, and underscores.";
     } else{
         // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE username = ?";
+        $sql = "SELECT slmc FROM doctor_base WHERE username = ?";
         
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
@@ -43,11 +45,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
-    
+    // Validate slmc
+    if(empty(trim($_POST["slmc"]))){
+      $slmc_err = "Please enter the SLMC number.";
+  } elseif(!preg_match('/^[a-zA-Z0-9]+$/', trim($_POST["slmc"]))){
+      $slmc_err = "SLMC can only contain letters, numbers";
+  } else{
+     $slmc=trim($_POST["slmc"]);
+  }
+    // Validate email
+    if(empty(trim($_POST["email"]))){
+      $email_err = "Please enter a email.";
+  } elseif(!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i', trim($_POST["email"]))){
+      $email_err = "Invalid email";
+  } else{
+     $email=trim($_POST["email"]);
+  }
+      // Validate password
+      if(empty(trim($_POST["mobile"]))){
+        $mobile_err = "Please enter a mobile number.";     
+    } elseif(strlen(trim($_POST["mobile"])) < 10){
+      //check string lenght
+        $mobile_err = "mobile number must have atleast 10 characters.";
+    } else{
+        $mobile = trim($_POST["mobile"]);
+    }
     // Validate password
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";     
     } elseif(strlen(trim($_POST["password"])) < 6){
+      //check string lenght
         $password_err = "Password must have atleast 6 characters.";
     } else{
         $password = trim($_POST["password"]);
@@ -62,19 +89,24 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     }
-    
+    /*Error*/
+
+
     // Check input errors before inserting in database
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+    if(empty($username_err) && empty($slmc_err) && empty($email_err) && empty($mobile_err) && empty($password_err) && empty($confirm_password_err)){
         
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $sql = "INSERT INTO doctor_base (username,slmc,email,mobile, password) VALUES (?, ?, ? ,? ,?)";
          
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "ss", $param_username, $param_password);
+            mysqli_stmt_bind_param($stmt, "sssss", $param_username,$param_slmc,$param_email, $param_mobile, $param_password);
             
             // Set parameters
             $param_username = $username;
+            $param_slmc = $slmc;
+            $param_email = $email;
+            $param_mobile= $mobile;
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
@@ -89,7 +121,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             mysqli_stmt_close($stmt);
         }
     }
-    
+     /*Error*/
+
+
+     
     // Close connection
     mysqli_close($link);
 }
@@ -127,6 +162,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <label>Username</label>
                 <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
                 <span class="invalid-feedback"><?php echo $username_err; ?></span>
+            </div>  
+            <div class="form-group">
+                <label>SLMC number</label>
+                <input type="text" name="slmc" class="form-control <?php echo (!empty($slmc_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $slmc; ?>">
+                <span class="invalid-feedback"><?php echo $slmc_err; ?></span>
+            </div>  
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email; ?>">
+                <span class="invalid-feedback"><?php echo $email_err; ?></span>
+            </div> 
+            <div class="form-group">
+                <label>Mobile</label>
+                <input type="text" name="mobile" class="form-control <?php echo (!empty($mobile_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $mobile; ?>">
+                <span class="invalid-feedback"><?php echo $mobile_err; ?></span>
             </div>    
             <div class="form-group">
                 <label>Password</label>
