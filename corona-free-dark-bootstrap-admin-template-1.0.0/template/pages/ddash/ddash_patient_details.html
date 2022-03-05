@@ -17,44 +17,54 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="../../assets/images/favicon.png" />
+
+ <!--
+          CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
+        <!--
+              CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+            -->
+
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.2.8/dist/web3.js"></script>
-    <script>	
-	
-	var account;
-	window.addEventListener('load', async () => {
-
-	
-		if (typeof window.ethereum !== 'undefined') { 
-			console.log("MetaMask is Available :) !"); 
-			}
-			
-		// Modern DApp browsers
-		if (window.ethereum) {
-			window.web3 = new Web3(ethereum);
-			
-			// To prevent the page reloading when the MetaMask network changes
-			ethereum.autoRefreshOnNetworkChange = false;
-			
-			// To Capture the account details from MetaMask
-			const accounts = await ethereum.enable();
-			account = accounts[0];
-				
-			}
-		// Legacy DApp browsers
-		else if (window.web3) {
-			//window.web3 = new Web3(web3.currentProvider);
-			window.web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c")); 
-			}
-		// Non-DApp browsers
-		else {
-			console.log('Non-Ethereum browser detected. Please install MetaMask');
-			}
-			
-			});
-    	
-        var abi =[
+    <!--
+          Patient CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+        -->
+        <script>
+          var account;
+      window.addEventListener('load', async () => {
+    
+      
+        if (typeof window.ethereum !== 'undefined') { 
+          console.log("MetaMask is Available :) !"); 
+          }
+          
+        // Modern DApp browsers
+        if (window.ethereum) {
+          window.web3 = new Web3(ethereum);
+          
+          // To prevent the page reloading when the MetaMask network changes
+          ethereum.autoRefreshOnNetworkChange = false;
+          
+          // To Capture the account details from MetaMask
+          const accounts = await ethereum.enable();
+          account = accounts[0];
+            
+          }
+        // Legacy DApp browsers
+        else if (window.web3) {
+          //window.web3 = new Web3(web3.currentProvider);
+          window.web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/cbd9dc11b30147e9a2cc974be655ef7c")); 
+          }
+        // Non-DApp browsers
+        else {
+          console.log('Non-Ethereum browser detected. Please install MetaMask');
+          }
+          
+          });
+          
+            var abi =[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -113,26 +123,6 @@
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -157,26 +147,6 @@
 			},
 			{
 				"internalType": "string",
-				"name": "age",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "gender",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "height",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "weight",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
 				"name": "Email",
 				"type": "string"
 			},
@@ -197,49 +167,53 @@
 		"type": "function"
 	}
 ];
-
-        var contractaddress='0xBBF6C4FF98C11DB6428fF4E541C841515d75957f';
+    
+    
+            
+            var contractaddress = '0x62a3Eb829C16D882Ffdb8fAd9ec288A4285A2169';
+            /*need more working on*/
+            function addpat() {
+                var myContract = new web3.eth.Contract(abi,contractaddress, {from: account,  gas: 1500000, gasPrice: '30000000000'});
+                var id = document.getElementById("pid").value;
+                var nic = document.getElementById("nic").value;
+                var dname = document.getElementById("pname").value;
+                var demail = document.getElementById("pemail").value;
+                var dphone = document.getElementById("pphone").value;
+                var daddress = document.getElementById("paddress").value;
+               
+               
+                 var result = myContract.methods.store_pat(id,nic,dname,demail,dphone,daddress).send(function (err, result) {
+                   
+                    if (err) {
+                      console.log("error");
+                       console.log(err); }
+                  
+                    });
+            }
+            /*need more working on*/
+    
         function getpat() {
-            var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gasPrice: '1500000000', gas: '30000000'});
-            var id = document.getElementById("get_nic").value;
-			
-             var result = myContract.methods.retreive_pat(id).call(function (err, result) {
-               
-                if (err) { console.log(err); }
-                if (result) { 
-          document.getElementById("get_name").innerHTML = result[0];
-					document.getElementById("get_age").innerHTML = result[1];
-					document.getElementById("get_gender").innerHTML = result[2];
-					document.getElementById("get_height").innerHTML = result[3];
-					document.getElementById("get_weight").innerHTML = result[4];
-          document.getElementById("get_email").innerHTML = result[5];
-          document.getElementById("get_phone").innerHTML = result[6];
-					document.getElementById("get_address").innerHTML = result[7];
-                }
-               
-                });
-				}
-
-        
-        function addpat() {
-            var myContract = new web3.eth.Contract(abi,contractaddress,{from: account, gasPrice: '1000000000', gas: '8000000'});
-            var id = document.getElementById("pid").value;
-            var name = document.getElementById("pname").value;
-            var age = document.getElementById("page").value;
-			      var gender = document.getElementById("pgender").value;
-			      var height = document.getElementById("pheight").value;
-			      var weight = document.getElementById("pweight").value;
-			      var address = document.getElementById("paddress").value;
-			      var phone = document.getElementById("pphone").value;
-			      var email = document.getElementById("pemail").value;
-			     
-             var result = myContract.methods.store_pat(id,name,age,gender,height,weight,address,phone,email).send(function (err, result) {
-
-               
-                });
-
-        }
+                var myContract = new web3.eth.Contract(abi,contractaddress, {from: account, gas: 1500000, gasPrice: '30000000000'});
+                var idd = document.getElementById("get_nic").value;
+                 var result = myContract.methods.retreive_pat(idd).call(function (err, result) {
+                   
+                    if (err) { console.log(err); }
+                    if (result) { 
+                        document.getElementById("get_pname").innerHTML = result[0];
+                        document.getElementById("get_pemail").innerHTML = result[1];
+                        document.getElementById("get_pphone").innerHTML = result[2];
+                        document.getElementById("get_paddress").innerHTML = result[3];
+                    }
+                   
+                    });
+            }
+    
+    
         </script>
+    
+      <!--
+              Patient CONTRACT CONNECTION FOR ADDING AN RETRIEVING DATA!
+            -->
     <div class="container-scroller">
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
@@ -302,10 +276,29 @@
           </div>
         </nav>
         <!-- partial -->
-        <div class="main-panel">
+        <div class="container-fluid page-body-wrapper">
+          <!-- partial:../../partials/_navbar.html -->
+          <nav class="navbar p-0 fixed-top d-flex flex-row">
+            <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+              <a class="navbar-brand brand-logo-mini" href="../../index.html"><img src="../../assets/images/logo-mini.svg" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+              <ul class="navbar-nav navbar-nav-right">
+                <li class="nav-item dropdown d-none d-lg-block">
+                  <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="/logout.php">  Log out</a>
+                    </a>
+                </li>
+              </ul>
+              <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                <span class="mdi mdi-format-line-spacing"></span>
+              </button>
+            </div>
+          </nav>
+          <!-- partial -->
+          <div class="main-panel">
             <div class="content-wrapper">
               <div class="page-header">
-                <h3 class="page-title"> Patient details </h3>
+                <h3 class="page-title"> Patient General details </h3>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -317,132 +310,97 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
+                       
                         <form>
-                          <h4 class="card-title">Show Patient Profile</h4>
+                          <h4 class="card-title">Show Patient Details</h4>
                           <div class="row">
                             <tr>
-                              <td>Enter NIC:</td>
+                              <td>Enter Patient ID:</td>
                              <td><input type="text" id="get_nic" name="get_nic"></td> 
                              <td> <input type="button" class="btn btn-primary mr-2" onclick="getpat()" value="show details"></td>
                             </tr>
-                            </div>
+                           
+                          </div>
+                          <br>
                           <table style="width:50%">
-                            <br>
-
-                          <tr>
-                            <td> Patient Name:</td>
-                            <td><div id="get_name"></div></td>
-                          </tr>
                             
-                          <tr>
-                            <td>Age:</td>
-                            <td><div id="get_age"></div></td>
-                          </tr>
-
-                          <tr>
-                            <td>Gender:</td>
-                            <td><div id="get_gender"></div></td>
-                          </tr>
-
-                            
-                          <tr>
-                            <td>Height(in ft):</td>
-                            <td><div id="get_height"></div></td>
-                          </tr>
-
-                          <tr>
-                            <td>Weight(in kg):</td>
-                            <td><div id="get_weight"></div></td>
-                          </tr>
-
-                          <tr>
-                            <td>Email Id:</td>
-                            <td><div id="get_email"></div></td>
-                          </tr>
-
-                          <tr>
-                            <td>Phone Number:</td>
-                            <td><div id="get_phone"></div></td>
-                          </tr>
-
-                          <tr>
-                            <td>Address:</td>
-                            <td><div id="get_address"></div></td>
-                          </tr>
-
-                          
+                            <tr>
+                            <td>Patient Name:</td> 
+                            <td><div id="get_pname"></div></td>
+                            </tr>
+  
+                            <tr>
+                              <td>Patient Email:</td>
+                              <td><div id="get_pemail"></div></td>
+                            </tr>
+  
+                            <tr>
+                            <td>Patient Phone Number:</td>
+                            <td><div id="get_pphone"></div></td>
+                            </tr>
+  
+                            <tr>
+                            <td>Patient Address:</td>
+                            <td><div id="get_paddress"></div></td>
+                            </tr>
+  
                           </table>
-                              </form>  
+                          </form>
+                        </div>
                       </div>
                     </div>
-                  </div>
-              </div>
-           
-
-            <div class="row">
-              <div class="col-12 grid-margin stretch-card">
-                  <div class="card">
-                    <div class="card-body">
-                      <h4 class="card-title">Enter Patient Details</h4>
-            <form>
-              <table style="width:50%"> 
-                  <tr>
-                    <td>Enter Patient Id:</td>
-                    <td><input type="text" id="pid" name="pid"></td>
-                </tr>
-
-                <tr>
-                    <td> Patient Name:</td>
-                    <td><input type="text" id="pname" name="pname"></td>
-                </tr>
-
-                <tr>
-                    <td>Age:</td>
-                    <td><input type="text" id="page" name="page"></td>
-                </tr>
-                 
-                <tr>
-                    <td>Gender:</td>
-                    <td><input type="text" id="pgender" name="pgender"></td>
-                </tr>
-                
-                <tr>
-                    <td>Height(in ft):</td>
-                    <td><input type="text" id="pheight" name="pheight"></td>
-                </tr>
-
-                <tr>
-                    <td>Weight(in kg):</td>
-                    <td><input type="text" id="pweight" name="pweight"></td>
-                </tr>
-
-                <tr>
-                    <td>Address:</td>
-                    <td><input type="text" id="paddress" name="paddress"></td>
-                </tr>
-
-                <tr>
-                    <td>Phone Number:</td>
-                    <td><input type="text" id="pphone" name="pphone"></td>
-                </tr>
-
-                <tr>
-                    <td>Email Id:</td>
-                    <td><input type="text" id="pemail" name="pemail"></td>
-                </tr>   
-                <tr>
-                  <tr><td><input type="button" class="btn btn-primary mr-2" onclick="addpat()" value="Enter Details"></td></tr>
-               </tr>      
-              </table>
-            </form>
-                    </div>
-                  </div>
-                </div>
+                          <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                              <div class="card-body">
+                                <h4 class="card-title">Enter Patient Details</h4>
+                          <form>
+                            <table style="width:50%">
+                              <tr>
+                                <td>Enter Patient Id:</td>
+                                <td><input type="text" id="pid" name="pid"></td>
+                                </tr>
+                              <tr>
+                              <td>Enter nic:</td>
+                              <td><input type="text" id="nic" name="nic"></td>
+                              </tr>
+  
+                              <tr>
+                              <td> Patient Name:</td>
+                              <td><input type="text" id="pname" name="pname"></td>
+                              <td><div id="name"></div></td>
+                              </tr>
+                             
+                                <td>Patient Email:</td>
+                                <td><input type="text" id="pemail" name="pemail"></td>
+                                </tr>
+                              <tr>
+                              <td>Patient Phone Number:</td>
+                              <td><input type="text" id="pphone" name="pphone"></td>
+                              </tr>
+                              <tr>
+                              <td>Patient Address:</td>
+                              <td><input type="text" id="paddress" name="paddress"></td>
+                              </tr>
+                              <div class="row">
+                                <tr>
+                                  <tr><td><input type="button"  class="btn btn-primary mr-2"onclick="addpat()" value="Enter Details"></td></tr>
+                              </tr>
+                              </div>
+                             
+                            </table>
+                                </form>
+                                
+                              </div>
+                            </div>
+                          </div>
+                           </div>
             </div>
-          </div>
-
-            <!-- content-wrapper ends -->
-            <!-- partial:../../partials/_footer.html -->
+        <!--
+          Patient FORM FOR ADDING AN RETRIEVING DATA!
+        -->
+  
+  
+           
             <footer class="footer">
               <div class="d-sm-flex justify-content-center justify-content-sm-between">
                 <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
@@ -451,6 +409,8 @@
             </footer>
             <!-- partial -->
           </div>
+  
+              </div>
           <!-- main-panel ends -->
       </div>
       <!-- page-body-wrapper ends -->

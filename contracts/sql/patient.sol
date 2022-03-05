@@ -8,7 +8,6 @@ contract patient_{
         int patient_id;
         string NIC;
         string Name;
-        string Password;
         string Email;
         string Phone_no;
         string Address;
@@ -27,7 +26,6 @@ contract patient_{
         int patient_id,
         string memory NIC, 
         string memory Name, 
-        string memory Password, 
         string memory Email, 
         string memory Phone_no,
         string memory Address
@@ -37,7 +35,6 @@ contract patient_{
             patient_id,
             NIC,
             Name,
-            Password,
             Email,
             Phone_no,
             Address);
@@ -50,7 +47,6 @@ contract patient_{
     ) public view returns(
         string memory,
         string memory, 
-        string memory,
         string memory, 
         string memory,
         string memory){
@@ -59,9 +55,9 @@ contract patient_{
                 Patient memory p= pat[i];
 
                 if(p.patient_id==patient_id){
-                    return(p.NIC, p.Name,p.Password,p.Email,p.Phone_no,p.Address);
+                    return(p.NIC, p.Name,p.Email,p.Phone_no,p.Address);
                 }
             }
-            return("not found","not found","not found","not found","not found","not found");
+            return("not found","not found","not found","not found","not found");
         }
 }
