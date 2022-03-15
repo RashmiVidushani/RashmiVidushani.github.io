@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location:corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/idash/idash_stat.html");
+                            header("location:corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/idash/idash_stat.php");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
@@ -139,7 +139,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         <div class="form-group">
             <input type="submit" class="btn btn-primary" value="Login">
         </div>
-        <p>Don't have an account? <a href="d_register.php">Sign up now</a>.</p>
+        <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
     </form>
               </div>
             </div>

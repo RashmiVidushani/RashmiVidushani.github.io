@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             $_SESSION["username"] = $username;                            
                             
                             // Redirect user to welcome page
-                            header("location:corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/hdash/hdash_stat.html");
+                            header("location:corona-free-dark-bootstrap-admin-template-1.0.0/template/pages/hdash/hdash_stat.php");
                         } else{
                             // Password is not valid, display a generic error message
                             $login_err = "Invalid username or password.";
@@ -125,7 +125,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             echo '<div class="alert alert-danger">' . $login_err . '</div>';
         }        
         ?>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form action="./dash_content/template/pages/hdash/hdash_stat.php" method="get">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" >
         <div class="form-group">
             <label>Username</label>
             <input type="text" name="username" class="form-control <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $username; ?>">
@@ -141,6 +142,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         </div>
         <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
     </form>
+        </form>
+      
               </div>
             </div>
           </div>

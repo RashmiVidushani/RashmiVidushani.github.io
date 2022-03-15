@@ -1,10 +1,20 @@
+<?php
+session_start();
+require_once "../config.php";
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hospital Dashboard</title>
+    <title>Doctor Dashboard</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../assets/vendors/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="../../assets/vendors/css/vendor.bundle.base.css">
@@ -24,52 +34,44 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item nav-category">
-            <h5 class="mb-0 font-weight-normal">Dashboard</h5>
+          <h5 class="mb-0 font-weight-normal">Dashboard</h5>
           </li>
-       
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../hdash/hdash_stat.php">
-            <span class="menu-icon">
-              <i class="mdi mdi-playlist-play"></i>
-            </span>
-            <span class="menu-title">Statistical Data</span>
-          </a>
-        </li>
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../hdash/hdash_general.php">
-            <span class="menu-icon">
-              <i class="mdi mdi-table-large"></i>
-            </span>
-            <span class="menu-title">General data</span>
-          </a>
-        </li>
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../hdash/hdash_doctor_details.php">
-            <span class="menu-icon">
-              <i class="mdi mdi-table-large"></i>
-            </span>
-            <span class="menu-title">Doctor details</span>
-          </a>
-        </li>
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../hdash/hdash_patient_details.php">
-            <span class="menu-icon">
-              <i class="mdi mdi-chart-bar"></i>
-            </span>
-            <span class="menu-title">Patient details</span>
-          </a>
-        </li>
-        <li class="nav-item menu-items">
-          <a class="nav-link" href="../hdash/hdash_patientrecords.php">
-            <span class="menu-icon">
-              <i class="mdi mdi-contacts"></i>
-            </span>
-            <span class="menu-title">Patient records</span>
-          </a>
-        </li>
+         
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../ddash/ddash_stat.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">Statistical Data</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../ddash/ddash_general.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+              <span class="menu-title">General data</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../ddash/ddash_patient_details.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">Patient details</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="../ddash/ddash_patientrecords.php">
+              <span class="menu-icon">
+                <i class="mdi mdi-contacts"></i>
+              </span>
+              <span class="menu-title">Patient records</span>
+            </a>
+          </li>
 
-      </ul>
-    </nav>
+        </ul>
+      </nav>
       <!-- partial -->
       <div class="container-fluid page-body-wrapper">
         <!-- partial:../../partials/_navbar.html -->
@@ -93,7 +95,7 @@
         <div class="main-panel">
             <div class="content-wrapper">
               <div class="page-header">
-                <h3 class="page-title"> Hospital General details </h3>
+                <h3 class="page-title"> Doctor General details </h3>
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Forms</a></li>
@@ -105,17 +107,36 @@
                 <div class="col-12 grid-margin stretch-card">
                     <div class="card">
                       <div class="card-body">
-                        <h4 class="card-title">Hospital Profile</h4>
+                        <h4 class="card-title">Doctor Profile</h4>
                         <form class="forms-sample">
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="form-group">
-                                  <label class="col-sm-3 col-form-label">Registration number</label>
+                                  <label class="col-sm-3 col-form-label">SLMC number</label>
                                   <div class="col-sm-9">
                                     <input type="text" class="form-control" />
                                   </div>
                                 </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label class="col-sm-3 col-form-label">Name</label>
+                                    <div class="col-sm-9">
+                                      <input type="text" class="form-control" />
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
+                              <div class="row">
+                                <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label class="col-sm-3 col-form-label">Date of Birth</label>
+                                    <div class="col-sm-9">
+                                      <input class="form-control" placeholder="dd/mm/yyyy" />
+                                    </div>
+                                  </div>
+                                </div>
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <label class="col-sm-3 col-form-label">Email</label>
@@ -145,7 +166,7 @@
                               </div>
                               </div>
                               <div class="form-group">
-                                <label>Upload Registration image</label>
+                                <label>Upload SLMC image</label>
                                 <input type="file" name="img[]" class="file-upload-default">
                                 <div class="input-group col-xs-12">
                                   <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Your SLMC Image here">
@@ -154,6 +175,26 @@
                                   </span>
                                 </div>
                               </div>  
+                              <div class="form-group">
+                                <label>Upload NIC image</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                  <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Your NIC Image here">
+                                  <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                                  </span>
+                                </div>
+                              </div>  
+                              <div class="form-group">
+                                <label>Upload Passport image</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                  <input type="text" class="form-control file-upload-info" disabled placeholder="Upload Your Passport Image here">
+                                  <span class="input-group-append">
+                                    <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
+                                  </span>
+                                </div>
+                              </div>
                               <div class="row">
                                 <div class="col-md-6">
                                   <div class="form-group">
